@@ -1,0 +1,10 @@
+\select@language {USenglish}
+\contentsline {chapter}{\numberline {1}Programming Report}{3}
+\contentsline {section}{\numberline {1.1}Team Members and Specification Changes}{3}
+\contentsline {section}{\numberline {1.2}Cryptanalysis Approach Used in the Program}{4}
+\contentsline {chapter}{\numberline {2}Extra Credit}{7}
+\contentsline {section}{\numberline {2.1}Survey on Substitution Ciphers}{7}
+\contentsline {section}{\numberline {2.2}Survey on Cryptanalysis approaches for subsitution ciphers}{8}
+\contentsline {section}{\numberline {2.3}Approach to Decrypt an Arbitrary Random English Plaintext}{8}
+\vspace *{\baselineskip }
+\contentsline {chapter}{References}{9}

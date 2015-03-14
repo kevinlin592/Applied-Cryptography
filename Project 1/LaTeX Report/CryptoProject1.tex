@@ -1,0 +1,377 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,twoside,10pt]{report}
+% Alternative Options:
+%	Paper Size: a4paper / a5paper / b5paper / letterpaper / legalpaper / executivepaper
+% Duplex: oneside / twoside
+% Base Font Size: 10pt / 11pt / 12pt
+
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[USenglish]{babel} %francais, polish, spanish, ...
+\usepackage[T1]{fontenc}
+\usepackage[ansinew]{inputenc}
+
+\usepackage{lmodern} %Type1-font for non-english texts and characters
+\usepackage{indentfirst}
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+%\usepackage{subfig} %%Subfigures inside a figure
+%\usepackage{pst-all} %%PSTricks - not useable with pdfLaTeX
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+%% Programming Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+
+%% Programming Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+ \definecolor{Darkgreen}{rgb}{0.000000,0.392157,0.000000}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,    
+	language=[GNU]C++,
+	basicstyle=\scriptsize,
+	upquote=true,
+	aboveskip={1.5\baselineskip},
+	columns=fixed,
+	showstringspaces=false,
+	extendedchars=false,
+	breaklines=true,
+	prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+	frame=single,
+	numbers=left,
+	showtabs=false,
+	showspaces=false,
+	showstringspaces=false,
+	identifierstyle=\ttfamily,
+	keywordstyle=\color[rgb]{0,0,1},
+	commentstyle=\color[rgb]{0.026,0.112,0.095},
+	stringstyle=\color[rgb]{0.627,0.126,0.941},
+	numberstyle=\color[rgb]{0.205, 0.142, 0.73},
+}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+  language=C++,
+  captionpos=b,
+  tabsize=3,
+  frame=lines,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  breaklines=true,
+  showstringspaces=false,
+  basicstyle=\footnotesize,
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color{Darkgreen},
+  stringstyle=\color{red}
+}
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage{setspace}
+%\singlespacing        %% 1-spacing (default)
+%\onehalfspacing       %% 1,5-spacing
+%\doublespacing        %% 2-spacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Options / Modifications
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\input{options} %You need a file 'options.tex' for this
+%% ==> TeXnicCenter supplies some possible option files
+%% ==> with its templates (File | New from Template...).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{\renewcommand{\bibname}{References}}
+\begin{document}
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% The simple version:
+\title{Substitution Cipher}
+\author{Kevin Lin, Kong Huang}
+%\date{} %%If commented, the current date is used.
+\maketitle
+
+%% The nice version:
+%\input{titlepage} %%You need a file 'titlepage.tex' for this.
+%% ==> TeXnicCenter supplies a possible titlepage file
+%% ==> with its templates (File | New from Template...).
+
+
+%% Table of Contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tableofcontents %Table of contents
+\cleardoublepage %The first chapter should start on an odd page.
+
+\pagestyle{plain} %Now display headings: headings / fancy / ...
+
+%% Chapters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Programming Report}\label{report}
+
+\section{Team Members and Specification Changes}\label{members}
+\noindent
+\textbf{Team Members:}
+\begin{description}
+	\item[Kevin Lin] \hfill \\
+	\vspace{-5mm}
+	\begin{itemize}
+		\item Created the project program and handled the coding aspects
+		\item Wrote sections 1.1, 2.2, and 2.3 of the report.
+	\end{itemize}
+	\item[Kong Huang] \hfill \\
+	\vspace{-5mm}
+	\begin{itemize}
+		\item Helped with algorithms and decryption schemes through pair programming
+		\item Wrote sections 1.2 and 2.1 of the report.
+		\item Formatted the report in LaTeX
+	\end{itemize}
+\end{description}
+
+\vspace{4mm}
+\noindent
+\textbf{No modifications were made} with respect to the following specifications outlined in the project:
+
+\vspace{5mm}
+\noindent
+Your program should take as input from stdin:
+\begin{enumerate}
+	\item the number t of key symbols,
+	\item an L-symbol challenge ciphertext,
+\end{enumerate}
+
+\noindent
+where each symbol is either a space or one of the 26 lower-case letters from the English alphabet (thus, not a special character, punctuation symbol or upper-case letter). Your program should return as output a guess for which L-symbol plaintext was encrypted, where again each symbol is either a space or one of the 26 lower-case letters from the English alphabet (thus, not a special character, punctuation symbol or upper-case letter). A text file Dictionary1 containing a number u of L-symbol candidate plaintexts will be provided to you, and you should feel free to use its content as part of your code. A text file Dictionary2 containing a number v of English words will be provided to you, and you should feel free to use its content as part of your code.\\
+
+\noindent
+Your executable file should be named ``<last name1>-<last name2>-decrypt``. Upon execution, it should obtain the above inputs 1,2 from stdin, and finally return the output plaintext on stdout within x minutes (or else it will be declared to default to an incorrect guess); most likely, we will choose x = 2.\\
+
+\noindent
+Your program will be run using different parameters (L=100, u=200, v=100, and t between 1 and 24), and on a number of challenge ciphertexts, each computed using a potentially different encryption scheme. Each ciphertext will be computed from a plaintext selected in one of the following two ways:
+
+\begin{enumerate}
+	\item randomly and independently choosing one of the L-symbol plaintexts in Dictionary1 or
+	\item concatenating words randomly and independently chosen from Dictionary2 (any two words being separated by a space, until one has an L-symbol plaintext).
+\end{enumerate}
+
+		
+	
+\noindent
+\section{Cryptanalysis Approach Used in the Program}\label{approach}
+
+\noindent
+\textbf{What we know: }
+\begin{itemize}
+	\item The message space and ciphertext space are the set $\{<space>,a,..,z\}^{L}$. In other words the message m can be written as m[1],...,m[L], where each m[i] is in \{(space>,a,..,z\}, and the ciphertext c can be written as c[1],...,c[L], where each c[i] is in \{<space>,a,..,z\}
+	
+	\item The key space is the set $\{0,..,26\}^{t}$. In other words the key k can be written as k[1],...,k[t], where each k[j] is in \{0,..,26\}, for j=1,..,t.
+	
+	\item The encryption algorithm computes each c[i] as equal to the (lexicographic) shift of m[i] by k[j(i)] positions, where the computation of each j(i) is left unspecified and may depend on i,t,L. In other words, each ciphertext symbol c[i] is the shift of the plaintext symbol m[i] by a number of position equal to one of the key symbols, which symbol being chosen according to an undisclosed, deterministic, and not key-based, scheduling algorithm that is a function of i, t and L.
+	
+\end{itemize}
+
+\noindent
+\textbf{Strategy for Dictionary 1: }
+\vspace{3mm}
+
+Since each letter can be mapped to a corresponding integer value, you can compare the given ciphertext with a possible plaintext using their numerical values in order to analyze the different shifts. The letter to value conversion goes as follows: 
+
+\begin{table}[h]
+\begin{tabular}{lllllllllllllllllllllllllll}
+A & B & C & D & E & F & ... &  X  & Y  & Z  & ' ' \\
+0 & 1 & 2 & 3 & 4 & 5 & ... &  23 & 24 & 25 & 26
+\end{tabular}
+\end{table}
+For Dictionary 1, the plaintext is the entire line. Therefore, all that is needed to be done is to do a direct comparison between the plaintext line and the ciphertext line. Given the strings of the two lines, our strategy was to compare each corresponding letter. In other words, dict1[0] will be compared with cipherText[0], dict1[1] will be compared with cipherText[1], etc. The comparison is done by subtracting the numerical value of the plaintext with the ciphertext. There is an error check where if the subtraction results in a negative number, 27 is added (the size of the table). The resulting value is inserted into a temporary set, in order to ensure no duplicates. If the size of that set (aka the number of unique characters) is less than or equal to the provided t, you have found the plaintext that corresponds to the ciphertext. \\
+
+\noindent
+The code that handles this comparison can be seen here:
+
+\begin{lstlisting}
+bool test1helper(const string &a, const string &b, int t){
+	set<int> temp;
+	int val1 = 0;
+	int val2 = 0;
+	for (size_t i = 0; i < a.length(); i++){
+		val1 = letter_to_value(a[i]);
+		val2 = letter_to_value(b[i]);
+		if (val1 - val2 < 0){
+			temp.insert(val1 - val2 + ALPHABET);
+		}
+		else {
+			temp.insert(val1 - val2);
+		}
+	}
+	return (temp.size() <= t);
+}
+\end{lstlisting}
+
+\vspace{5mm}
+\noindent
+\textbf{Strategy for Dictionary 2:}
+\vspace{3mm}
+
+The same strategy used for Dictionary 1 can also be applied to Dictionary 2. Therefore, much of the comparison code will remain the same. In fact, the comparison code looks like this:
+\begin{lstlisting}
+bool test2helper(set<int> &duplicates, const string &a, const string &b, int t, int pos){
+	int val1 = 0;
+	int val2 = 0;
+	for (size_t i = pos; i < a.length(); i++){
+		val1 = letter_to_value(a[i]);
+		val2 = letter_to_value(b[i]);
+		if (val1 - val2 < 0){
+			duplicates.insert(val1 - val2 + ALPHABET);
+		}
+		else {
+			duplicates.insert(val1 - val2);
+		}
+	}
+	return (duplicates.size() <= t);
+}
+\end{lstlisting}
+\vspace{5mm}
+
+However, as you can see, the biggest difference is that we are also passing in where we are in the dictionary, as well as the set of duplicates. This is because we have to concatenate the words so it would compare the ciphertext with them one by one. As we compare the words with the ciphertext, if there is a reasonable assumption that the word is the correct one, we append it to a custom string we defined as 'guess.' The decryption algorithm recursively calls itself until the decrypted plaintext is found. The algorithm runs depth-first rather than breadth first, and the code can be seen here:
+
+\begin{lstlisting}
+bool test2(set<int> duplicates, const string &guess, string dict2[], int dict2Length, const string &cipherText, int t){
+	if (guess.length() == L){
+		cout << "The decrypted plaintext is: " << endl << guess << endl;
+		return true;
+	}
+	else {
+		int length = guess.length();
+		set<int> duplicatesCopy;
+		string guessCopy;
+		for (size_t i = 0; i < dict2Length; i++){
+			duplicatesCopy = duplicates;
+			guessCopy = guess;
+
+			guessCopy.append(dict2[i]);
+			guessCopy.append(" ");
+			if (guessCopy.length() > L){
+				guessCopy.resize(L);
+			}
+
+			if (test2helper(duplicatesCopy, guessCopy, cipherText, t, length)){
+				if (test2(duplicatesCopy, guessCopy, dict2, dict2Length, cipherText, t)){
+					return true;
+				}
+			}
+
+		}
+	}
+	return false;
+}
+
+//	This function examines the ciphertext using the second dictionary
+bool test2(string dict2[], int dict2Length, const string &cipherText, int t){
+	set<int> duplicates;
+	string guess = "";
+	return test2(duplicates, guess, dict2, dict2Length, cipherText, t);
+}
+\end{lstlisting}
+
+\vspace{4mm}
+In terms of efficiency, Dictionary 1's decryption algorithm appears to be of polynomial time whereas Dictionary 2's decryption algorithm appears to be of sub-exponential time. For Dictionary 2, the algorithm grows faster than any polynomial but is still significantly smaller than an exponential. 
+
+\vspace{4mm}
+
+\chapter{Extra Credit}\label{extra}
+
+\section{Survey on Substitution Ciphers}\label{ciphersurvey}
+
+Substition ciphers are one of the oldest ways to encrypt a message, their main attractions being that they are simple to use and intuitive. There are many variants of the substition cipher, such as monoalphabetic substitutions which include the simple substitution and homophonic substitution ciphers. There are also polyalphabetic substititution ciphers, such as the Vigen\'ere cipher and Enigma (used in World War II). In this survey, we primarily examine monoalphabetic substitution ciphers. \\
+
+The simple substitution cipher basically consists of substituting every plaintext character for a different cipher text character. While ciphers such as the Caesar cipher shifts each letter in the plaintext a certain number of places down the alphabet, the simple substitution cipher is completely jumbled. However, it offers almost no communication security, and is vulnerable to even the most elementary statistical analysis. An example of the simple substitution key is shown below:
+
+\begin{lstlisting}
+plaintext:   ABCDEFGHIJKLMNOPQRSTUVWXYZ
+ciphertext:  YBXONGSWKCPZFMTDHRQUJVELIA
+\end{lstlisting}
+
+\vspace{4mm}
+Using this key, the plaintext HELLO would encrypt to ciphertext WNZZT. Any given plaintext letter always encrypts to the same cipher text letter. This means that the cryptanalyst looking at the word WNZZT will know that the third and fourth letters are the same, even if they do not know what letter it is. With regards to the English language, the simple substitution key space consists of 26! possible permutations of the alphabet. To think about how big this number is, if someone were to check a million keys per second, it would still take over 12 trillion ($10^{12}$) years to check all possible keys. Therefore, as a brute force attack is clearly infeasible, a good strategy to crack the cipher is through frequency analysis. As observed before, each ciphertext letter has the same frequency in ciphertext as its corresponding plaintext letter has in the plaintext. Once a few of the high-frequency letters have been determined, common letter patterns will become apparent and the key can then be completely recovered.
+
+On the other hand, a homophonic substitution applies a one-to-many mapping as opposed to the one-to-one mapping of a simple substitution. In other words, there may be more than one possible substitution for a given plaintext letter. However, even if there are multiple ciphertexts, each ciphertext symbol can only represent one plaintext letter. An example of the homophonic substitution key is shown below:
+
+\begin{lstlisting}
+plaintext:   A B C D E F G H I J K L M N O P Q R S T U V W X Y Z
+ciphertext:  D X S F Z E H C V I T P G A Q L K J R U O W M Y B N
+                     7       3     9   5 0       4 6            
+                                   2                    
+                                   1
+\end{lstlisting}
+
+\vspace{4mm}
+Using this key, any of the symbols P, 9, 2, or 1 can be substituted for a plaintext L, either Z or 7 can be substituted for a plaintext E, and either Q or 0 for a plaintext O. Therefore, the same plaintext HELLO from before can be encrypted as C7P9Q, CZ2P0, or etc. This means that a cryptanalyst looking at this ciphertext will have no indication that the third and fourth characters represent the same plaintext letter. With N distinct ciphertext symbols and using English as the language, the homophonic substitution cipher has the theoretical keyspace of 26^N \approx \hspace{2mm} $2^{5N}$ as opposed to the 26! of the simple substitution cipher. To compare using the person that can check a million keys per second from before, it will take $26^{100}$/10^6 = 3.14 \hspace{1mm} * \hspace{1mm}  $10^{135}$ seconds (nearly $10^{128}$ years) to solve a ciphertext with N = 100. As shown, the differences between the keyspaces between the two different ciphers increases exponentially as the number of distinct ciphertext symbols increases. Of course, this means that an exhaustive brute force search is completely out of the question, and cryptanalysis will depend on other methods. \\
+
+As mentioned, there are many other substitution ciphers available other than these two. There also exists polyalphabetic substitutions where multiple cipher alphabets are used, notably being the Gronsfeld and Beaufort ciphers. Another substitution method is known as polygraphic substitution, where plaintext letters are substituted in larger groups instead of substituting letters individually. While substitution ciphers are no longer in serious use, the concept of substitution ciphers are used in modern cryptography. An example being AES, which can technically be viewed as substitution cipher on an enormously large binary alphabet.
+
+\section{Survey on Cryptanalysis approaches for subsitution ciphers}\label{approachessurvey}
+%insert words here
+
+\section{Approach to Decrypt an Arbitrary Random English Plaintext}
+%insert words here
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY AND OTHER LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A small distance to the other stuff in the table of contents (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+%% The Bibliography
+
+\clearpage
+\addcontentsline{toc}{chapter}{References}
+\begin{thebibliography}{9}
+\bibitem{dhavare} 
+Dhavare, Amrapali.
+"Efficient Attacks on Homophonic Substitution Ciphers." Thesis. San Jose State University, 2011. 
+\textit{SJSU ScholarWorks} (2011): 1-80. 
+\textit{ScholarWorks.} 
+Web. 14 Mar. 2015.
+ 
+\bibitem{practicalhomophonic} 
+"Homophonic Substitution Cipher." 
+\textit{Practical Cryptography.} 
+Web. 14 Mar. 2015.
+ 
+\bibitem{low} 
+Low, Richard M., Amrapali Dhavare, and Mark Stamp. 
+\textit{Efficient Cryptanalysis of Homophonic Substitution Ciphers.}
+SJSU, n.d. Web. 14 Mar. 2015.
+
+\bibitem{practicalsimple}
+"Simple Substitution Cipher." 
+\textit{Practical Cryptography.} 
+Web. 14 Mar. 2015.
+
+\bibitem{wikisubstitution}
+"Substitution Cipher." 
+\textit{Wikipedia.} 
+Wikimedia Foundation, Web. 14 Mar. 2015.
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%% ==> Write your text here or include other files.
+%\input{FileName} %You need a file 'FileName.tex' for this.
+
+\end{document}
+

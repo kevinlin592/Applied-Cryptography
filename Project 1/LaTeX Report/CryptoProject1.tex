@@ -86,6 +86,8 @@
 %% Options / Modifications
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\providecommand{\myfloor}[1]{\left \lfloor #1 \right \rfloor }
+
 %\input{options} %You need a file 'options.tex' for this
 %% ==> TeXnicCenter supplies some possible option files
 %% ==> with its templates (File | New from Template...).
@@ -195,7 +197,7 @@ A & B & C & D & E & F & ... &  X  & Y  & Z  & ' ' \\
 0 & 1 & 2 & 3 & 4 & 5 & ... &  23 & 24 & 25 & 26
 \end{tabular}
 \end{table}
-For Dictionary 1, the plaintext is the entire line. Therefore, all that is needed to be done is to do a direct comparison between the plaintext line and the ciphertext line. Given the strings of the two lines, our strategy was to compare each corresponding letter. In other words, dict1[0] will be compared with cipherText[0], dict1[1] will be compared with cipherText[1], etc. The comparison is done by subtracting the numerical value of the plaintext with the ciphertext. There is an error check where if the subtraction results in a negative number, 27 is added (the size of the table). The resulting value is inserted into a temporary set, in order to ensure no duplicates. If the size of that set (aka the number of unique characters) is less than or equal to the provided t, you have found the plaintext that corresponds to the ciphertext. \\
+For Dictionary 1, the plaintext is the entire line. Therefore, all that is needed to be done is to do a direct comparison between the plaintext line and the ciphertext line. Given the strings of the two lines, our strategy was to compare each corresponding letter. In other words, dict1[0] will be compared with cipherText, dict1[1] will be compared with cipherText, etc. The comparison is done by subtracting the numerical value of the plaintext with the ciphertext. There is an error check where if the subtraction results in a negative number, 27 is added (the size of the table). The resulting value is inserted into a temporary set, in order to ensure no duplicates. If the size of that set (aka the number of unique characters) is less than or equal to the provided t, you have found the plaintext that corresponds to the ciphertext. \\
 
 \noindent
 The code that handles this comparison can be seen here:
@@ -286,7 +288,7 @@ bool test2(string dict2[], int dict2Length, const string &cipherText, int t){
 \end{lstlisting}
 
 \vspace{4mm}
-In terms of efficiency, Dictionary 1's decryption algorithm appears to be of polynomial time whereas Dictionary 2's decryption algorithm appears to be of sub-exponential time. For Dictionary 2, the algorithm grows faster than any polynomial but is still significantly smaller than an exponential. 
+In terms of efficiency, Dictionary 1's decryption algorithm appears to be of $O(n)$ time where $n$ is the total number of sentences in the dictionary. In the case of this project, $n=200$, so Dictionary 1's decryption algorithm will be extremely efficient. Whereas Dictionary 2's decryption algorithm appears to be of $O(n^m)$ time where $n$ is the total number of words in the dictionary and $m$ is limited by the ciphertext length and the length of the words in the dictionary. In the worst case scenario, $m$ will be half of the ciphertext length (there are words in the dictionary with only one character). However, for this project, the ciphertext is 100 characters, the shortest word in the dictionary contains 6 characters, and there are 100 words in the dictionary, so $m=\myfloor{\frac{100}{6+1}}=14$ and $n=100$. This is less efficient than Dictionary 1's decryption algorithm and can potentially be very slow given greater $m$. 
 
 \vspace{4mm}
 

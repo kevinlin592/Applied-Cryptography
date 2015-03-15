@@ -132,13 +132,13 @@
 	\vspace{-5mm}
 	\begin{itemize}
 		\item Created the project program and handled the coding aspects
-		\item Wrote sections 1.1, 2.2, and 2.3 of the report.
+		\item Wrote sections 1.1 and half of 2.1 of the report.
 	\end{itemize}
 	\item[Kong Huang] \hfill \\
 	\vspace{-5mm}
 	\begin{itemize}
 		\item Helped with algorithms and decryption schemes through pair programming
-		\item Wrote sections 1.2 and 2.1 of the report.
+		\item Wrote sections 1.2 and half of 2.1 of the report.
 		\item Formatted the report in LaTeX
 	\end{itemize}
 \end{description}
@@ -322,12 +322,6 @@ ciphertext:  D X S F Z E H C V I T P G A Q L K J R U O W M Y B N
 Using this key, any of the symbols P, 9, 2, or 1 can be substituted for a plaintext L, either Z or 7 can be substituted for a plaintext E, and either Q or 0 for a plaintext O. Therefore, the same plaintext HELLO from before can be encrypted as C7P9Q, CZ2P0, or etc. This means that a cryptanalyst looking at this ciphertext will have no indication that the third and fourth characters represent the same plaintext letter. With N distinct ciphertext symbols and using English as the language, the homophonic substitution cipher has the theoretical keyspace of 26^N \approx \hspace{2mm} $2^{5N}$ as opposed to the 26! of the simple substitution cipher. To compare using the person that can check a million keys per second from before, it will take $26^{100}$/10^6 = 3.14 \hspace{1mm} * \hspace{1mm}  $10^{135}$ seconds (nearly $10^{128}$ years) to solve a ciphertext with N = 100. As shown, the differences between the keyspaces between the two different ciphers increases exponentially as the number of distinct ciphertext symbols increases. Of course, this means that an exhaustive brute force search is completely out of the question, and cryptanalysis will depend on other methods. \\
 
 As mentioned, there are many other substitution ciphers available other than these two. There also exists polyalphabetic substitutions where multiple cipher alphabets are used, notably being the Gronsfeld and Beaufort ciphers. Another substitution method is known as polygraphic substitution, where plaintext letters are substituted in larger groups instead of substituting letters individually. While substitution ciphers are no longer in serious use, the concept of substitution ciphers are used in modern cryptography. An example being AES, which can technically be viewed as substitution cipher on an enormously large binary alphabet.
-
-\section{Survey on Cryptanalysis approaches for subsitution ciphers}\label{approachessurvey}
-%insert words here
-
-\section{Approach to Decrypt an Arbitrary Random English Plaintext}
-%insert words here
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% BIBLIOGRAPHY AND OTHER LISTS

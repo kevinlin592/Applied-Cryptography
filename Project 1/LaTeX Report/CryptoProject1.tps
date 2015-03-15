@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1242
-NormalPos.bottom=360
+NormalPos.right=1916
+NormalPos.bottom=580
 Class=LaTeXView
 Document=CryptoProject1.tex
 
 [Frame0_View0,0]
-TopLine=381
-Cursor=17329
+TopLine=107
+Cursor=3722
 
 [SessionInfo]
 FrameCount=1

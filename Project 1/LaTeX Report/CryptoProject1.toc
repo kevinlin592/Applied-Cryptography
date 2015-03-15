@@ -4,7 +4,5 @@
 \contentsline {section}{\numberline {1.2}Cryptanalysis Approach Used in the Program}{4}
 \contentsline {chapter}{\numberline {2}Extra Credit}{8}
 \contentsline {section}{\numberline {2.1}Survey on Substitution Ciphers}{8}
-\contentsline {section}{\numberline {2.2}Survey on Cryptanalysis approaches for subsitution ciphers}{9}
-\contentsline {section}{\numberline {2.3}Approach to Decrypt an Arbitrary Random English Plaintext}{9}
 \vspace *{\baselineskip }
 \contentsline {chapter}{References}{10}

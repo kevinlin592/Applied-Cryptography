@@ -1,3 +1,7 @@
+/*	Kevin Lin, Kong Huang
+ *	Applied Cryptography Project 1
+ */
+
 #include <iostream>
 #include <string>
 #include <fstream>

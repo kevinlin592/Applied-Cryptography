@@ -307,7 +307,7 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 				 //string finalContent = encryptedContent + "\n" + decryptedContent;
 
 				 string introduction = "Hello,\n\n" + from + " has sent you an encrypted message. Here it is: \n\n";
-				 string ending = "\n\nUse the program with the key and salt that you should probably know to decrypt the message. Thanks for using our program!";
+				 string ending = "\n\nUse the program with the key that you should probably know to decrypt the message. Thanks for using our program!";
 				 string finalMessage = introduction + encryptedContent + ending;
 
 				 MailMessage message;

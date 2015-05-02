@@ -1,7 +1,7 @@
-﻿Build started 5/2/2015 1:37:07 PM.
-     1>Project "C:\Users\Alberdi\Documents\Visual Studio 2013\Projects\Project2\Project2\Project2.vcxproj" on node 2 (Build target(s)).
+﻿Build started 5/2/2015 2:08:37 PM.
+     1>Project "C:\Users\Alberdi\Documents\GitHub\Applied-Cryptography\Project 2\Email Cryptography\Project2\Project2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\OpenSSL\include /IC:\poco\Util\include /IC:\poco\Foundation\include /IC:\poco\Net\include /IC:\poco\NetSSL_OpenSSL\include /IC:\poco\Crypto\include /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MainForm.cpp
+         D:\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\OpenSSL\include /IC:\poco\Util\include /IC:\poco\Foundation\include /IC:\poco\Net\include /IC:\poco\NetSSL_OpenSSL\include /IC:\poco\Crypto\include /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\\" /AI"C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Facades\\" /Zi /clr /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib MainForm.cpp sha256.cpp
          MainForm.cpp
      1>C:\poco\Foundation\include\Poco/SharedPtr.h(70): warning C4150: deletion of pointer to incomplete type 'Poco::Net::PrivateKeyPassphraseHandler'; no destructor called
                  C:\poco\NetSSL_OpenSSL\include\Poco/Net/PrivateKeyFactory.h(30) : see declaration of 'Poco::Net::PrivateKeyPassphraseHandler'
@@ -25,7 +25,7 @@
                  [
                      C=Poco::Net::PrivateKeyPassphraseHandler
                  ]
-                 c:\users\alberdi\documents\visual studio 2013\projects\project2\project2\SendForm.h(324) : see reference to function template instantiation 'Poco::SharedPtr<Poco::Net::PrivateKeyPassphraseHandler,Poco::ReferenceCounter,Poco::ReleasePolicy<C>>::SharedPtr(C *)' being compiled
+                 c:\users\alberdi\documents\github\applied-cryptography\project 2\email cryptography\project2\SendForm.h(324) : see reference to function template instantiation 'Poco::SharedPtr<Poco::Net::PrivateKeyPassphraseHandler,Poco::ReferenceCounter,Poco::ReleasePolicy<C>>::SharedPtr(C *)' being compiled
                  with
                  [
                      C=Poco::Net::PrivateKeyPassphraseHandler
@@ -35,14 +35,16 @@
                  [
                      C=Poco::Net::PrivateKeyPassphraseHandler
                  ]
+         sha256.cpp
+         Generating Code...
        Link:
-         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alberdi\Documents\Visual Studio 2013\Projects\Project2\Release\Project2.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\poco\lib /ASSEMBLYRESOURCE:Release\Project2.DecryptForm.resources /ASSEMBLYRESOURCE:Release\Project2.MainForm.resources /ASSEMBLYRESOURCE:Release\Project2.SendForm.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alberdi\Documents\Visual Studio 2013\Projects\Project2\Release\Project2.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"Main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Release\MainForm.obj
+         D:\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Alberdi\Documents\GitHub\Applied-Cryptography\Project 2\Email Cryptography\Release\Project2.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:C:\poco\lib /ASSEMBLYRESOURCE:Release\Project2.DecryptForm.resources /ASSEMBLYRESOURCE:Release\Project2.MainForm.resources /ASSEMBLYRESOURCE:Release\Project2.SendForm.resources /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Alberdi\Documents\GitHub\Applied-Cryptography\Project 2\Email Cryptography\Release\Project2.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"Main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Release\MainForm.obj
          Release\sha256.obj
          "Release\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
      1>MainForm.obj : warning LNK4248: unresolved typeref token (01000027) for 'Poco.Net.PrivateKeyPassphraseHandler'; image may not run
-         Project2.vcxproj -> C:\Users\Alberdi\Documents\Visual Studio 2013\Projects\Project2\Release\Project2.exe
-     1>Done Building Project "C:\Users\Alberdi\Documents\Visual Studio 2013\Projects\Project2\Project2\Project2.vcxproj" (Build target(s)).
+         Project2.vcxproj -> C:\Users\Alberdi\Documents\GitHub\Applied-Cryptography\Project 2\Email Cryptography\Release\Project2.exe
+     1>Done Building Project "C:\Users\Alberdi\Documents\GitHub\Applied-Cryptography\Project 2\Email Cryptography\Project2\Project2.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.64
+Time Elapsed 00:00:03.17

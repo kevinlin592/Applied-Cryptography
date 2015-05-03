@@ -17,7 +17,7 @@ Class=LaTeXView
 Document=CryptoProject1.tex
 
 [Frame0_View0,0]
-TopLine=125
+TopLine=110
 Cursor=4572
 
 [SessionInfo]

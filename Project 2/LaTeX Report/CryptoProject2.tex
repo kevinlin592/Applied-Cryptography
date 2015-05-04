@@ -128,7 +128,7 @@
 
 \section{Design of the Email Application}\label{members}
 
-Our email application allows a user to encrypt an email message, and then send it securely to another user. The other user can then use our application to decrypt the received message. 
+Our email application allows a user to encrypt an email message (using Gmail), and then send it securely to another user. The other user can then use our application to decrypt the received message. 
 
 \begin{figure}[h]
 	\centering
@@ -152,11 +152,22 @@ We used implicit TLS as the primary cryptographic protocol in sending the email 
 	\item The session remains encrypted throughout the entire connection.
 \end{enumerate}
 
-However, since encryption always consumes more bandwidth and computational resources, there may be instances when you'll want to encrypt only one channel. In that case, you can use explicit SSL which allows you to choose which channel to encrypt.  You can even choose to revert back to a regular (unencrypted) connection and not encrypt any channel at all.
+The encrypted session uses TLS 1.2, following the normal TLS handshake protocol. This involves seven general steps:
+\begin{enumerate}
+	\item The application sends a "client hello" message to the Gmail server. In this message the supported cipher suites are expressed in the standard OpenSSL notation: "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH". The application supports all CipherSuites excluding anonymous Diffie-Hellman cipher suites, cipher suites utilizing 64 or 56 bit encryption algorithms, cipher suites utilizing export encryption schemes, and cipher suites utilizing the MD5 encryption scheme. Additionally, a random byte string is generated and sent in this message.
+	\item The Gmail server will respond with a "server hello" message, choosing one of the cipher suites that the application supports. Along with the message, a session ID, a random byte string, and the server's digital certificate is sent. 
+	\item The application verifies the server's digital certificate.
+	\item The application creates a premaster secret using the two random byte strings from steps 1 and 2, and encrypts it using the server's public key. Subsequently, it is sent to the server. After this step, both the server and the application can generate the shared secret key using all of the transmitted messages.
+	\item The application sends a "finished" message encrypted using the shared secret key.
+	\item The server sends a "finished" message encrypted using the shared secret key.
+	\item Using the shared secret key, the application and the server can communicate privately (sending emails and receiving confirmation of emails being sent).
+\end{enumerate}
+
+However, since encryption always consumes more bandwidth and computational resources, there may be instances when you'll want to encrypt only one channel. In that case, you can use explicit TLS which allows you to choose which channel to encrypt.  You can even choose to revert back to a regular (unencrypted) connection and not encrypt any channel at all.
 
 \vspace{2.5mm}
 
-Using TLS/SSL provides us with strong authentication, message privacy, and integrity. TLS/SSL can help to secure transmitted data using encryption. TLS/SSL also authenticates servers and clients to prove the identities of parties engaged in secure communication. It also provides data integrity through an integrity check value. In addition to protecting against data disclosure, the TLS/SSL security protocol can be used to help protect against masquerade attacks, man-in-the-middle attacks, and replay attacks.
+Using TLS provides us with strong authentication, message privacy, and integrity. TLS can help to secure transmitted data using encryption. TLS also authenticates servers and clients to prove the identities of parties engaged in secure communication. It also provides data integrity through an integrity check value. In addition to protecting against data disclosure, the TLS security protocol can be used to help protect against masquerade attacks, man-in-the-middle attacks, and replay attacks.
 
 \noindent
 \section{Cryptographic attacks and their defenses}\label{approach}
@@ -168,13 +179,13 @@ Using TLS/SSL provides us with strong authentication, message privacy, and integ
 \noindent
 \textit{How it works: }
 
-The majority of network communications occur in an unsecured or plaintext format. This means that an attacker who has gained access to data paths in your network can listen in and interpret the network traffic. In short, eavesdropping is the act of intercepting communications between two points. A specialized program can be used to sniff and record packets of data communications from a network and then subsequently listened to or read using cryptographic tools for analysis and decryption. As an example, Voice over IP (VoIP) calls made using IP-based communication can be picked up and recorded using protocol analyzers and then converted to audio files using other specialized software.
+The majority of network communications occur in an unsecured or plaintext format. This means that an attacker who has gained access to data paths in your network can listen in and interpret the network traffic. In short, eavesdropping is the act of intercepting communications between two points. A specialized program can be used to sniff and record packets of data communications from a network. By using cryptographic tools for analysis and decryption, these recorded packets can be easily read and  examined afterward. As an example, Voice over IP (VoIP) calls made using IP-based communication can be picked up and recorded using protocol analyzers and then converted to audio files using other specialized software.
 
 \vspace{2.5mm}
 \noindent
 \textit{Our defense: }
 
-Our email application uses Transport Layer Security (TLS), and since TLS encrypts the transmission, no data can be eavesdropped. However, TLS cannot prevent eavesdropping if the certificate authority (CA) is not safe, which is not our concern since we are properly checking for valid signed certificates from trusted CAs. However, TLS will not protect against attacks against the endpoints itself. That is, it will not help you if there are bugs in the used TLS stacks, buffer overflows or bugs in the application logic (aka cross-site-scripting). If the attacker manages to compromise the endpoint in some ways (which is unlikely since they have to compromise gmail) he will be able to inject itself into the application to get access to the unencrypted data or to the encryption keys.
+Our email application uses Transport Layer Security (TLS), and since TLS encrypts the transmission, the contained data cannot be eavesdropped. However, TLS cannot prevent eavesdropping if the certificate authority (CA) is not safe, which is not our concern since we are properly checking for valid signed certificates from trusted CAs. In addition, TLS will not protect against attacks against the endpoints itself. That is, it will not help you if there are bugs in the used TLS stacks, buffer overflows or bugs in the application logic (aka cross-site-scripting). If the attacker manages to compromise the endpoint in some ways (which is unlikely since they have to compromise Gmail) he will be able to inject itself into the application to get access to the unencrypted data or to the encryption keys.
 
 \vspace{2.5mm}
 \noindent
@@ -190,7 +201,7 @@ After an attacker has read your data, the next logical step is to alter it. A da
 \noindent
 \textit{Our defense: }
 
-Since our transmission is encrypted, the attacker cannot read our data. This means that the attacker cannot modify it and we are safe from this attack.
+Since our transmission is encrypted, the attacker cannot alter the data without the message becoming invalid. Through the standard TLS protocol, encryption involves the usage of HMACs (keyed-hash message authentication codes), so if the attacker wanted to modify the email, the attacker would need to know the secret and the message (amongst others), which is impossible given the usage of the public key infrastructure in TLS. Without knowing these, the attacker can only modify the message arbitrarily, causing the server to deem the email invalid when confirming the authenticity of the sender. For extra clarity, the TLS 1.2 specification Appendix F.2 states: "To prevent message replay or modification attacks, the MAC is computed from the MAC key, the sequence number, the message length, the message contents, and two fixed character strings."
 
 \vspace{2.5mm}
 \noindent
@@ -206,7 +217,7 @@ A data replay attack is a form of network attack in which a valid data transmiss
 \noindent
 \textit{Our defense: }
 
-The SSL/TLS channel itself is protected against replay attacks using the MAC. The TLS 1.1 specification Appendix F.2 states: "`To prevent message replay or modification attacks, the MAC is computed from the MAC secret, the sequence number, the message length, the message contents, and two fixed character strings."' Also, TLS requires the client and server to exchange a nonce in the hello message. The implementation should verify that the nonce is never repeated in order to prevent the replay attacks.
+The TLS channel itself is protected against replay attacks using the HMAC in the same fashion as stated in the previous section. The TLS 1.2 specification Appendix F.2 states: "To prevent message replay or modification attacks, the MAC is computed from the MAC key, the sequence number, the message length, the message contents, and two fixed character strings." Also, TLS requires the client and server to exchange a nonce in the hello message. The implementation should verify that the nonce is never repeated in order to prevent the replay attacks.
 
 \vspace{2.5mm}
 \noindent
@@ -216,13 +227,13 @@ The SSL/TLS channel itself is protected against replay attacks using the MAC. Th
 \noindent
 \textit{How it works: }
 
-Most networks and operating systems use the IP address of a computer to identify a valid entity. In certain cases, it is possible for an IP address to be falsely assumed— identity spoofing. The attacker then masquerades as another by falsifying data and gaining an illegitimate advantage. An attacker might also use special programs to construct IP packets that appear to originate from valid addresses. After gaining access to the network with a valid IP address, the attacker can modify, reroute, or delete your data.
+Most networks and operating systems use the IP address of a computer to identify a valid entity. In certain cases, it is possible for an IP address to be falsely assumed (identity spoofing). The attacker then masquerades as another by falsifying data and gaining an illegitimate advantage. An attacker might also use special programs to construct IP packets that appear to originate from valid addresses. After gaining access to the network with a valid IP address, the attacker can modify, reroute, or delete your data.
 
 \vspace{2.5mm}
 \noindent
 \textit{Our defense: }
 
-This type of attack is not much of a problem for TLS connections, as TLS authenticates all parties and encrypts all traffic. Using TLS prevents an attacker from performing IP address spoofing on a specific connection (for example, mutual TLS connections). However, an attacker could still spoof the address of the DNS server.
+This type of attack is not much of a problem for TLS connections as TLS authenticates all parties and encrypts all traffic. Using TLS prevents an attacker from performing IP address spoofing on a specific connection (for example, mutual TLS connections). However, an attacker could still spoof the address of the DNS server. Additionally, if the attacker has access to the email and password of the recipient of a delivered message, the attacker cannot decrypt the message because of the additional AES encryption.
 
 \vspace{2.5mm}
 \noindent
@@ -238,8 +249,7 @@ In this attack, an attacker places himself in between a visitor and a web site, 
 \noindent
 \textit{Our defense: }
 
-The certificate authority system is designed to stop the man-in-the-middle attacks. In TLS, the server uses the private key associated with their certificate to establish a valid connection. The server keeps the key secret, so the man-in-the-middle can’t use the site’s real certificate; they have to use one of their own. The attacker has to either convince a certificate authority to sign their certificate, or just use it, as is. A man-in-the-middle trying to use a certificate that is not validated by a known trusted CA should be caught immediately.
-
+The certificate authority system is designed to stop the man-in-the-middle attacks. In TLS, the server uses the private key associated with their certificate to establish a valid connection. The server keeps the key secret, so the man-in-the-middle can't use the site's real certificate; they have to use one of their own. The attacker has to either convince a certificate authority to sign their certificate, or just use it, as is. A man-in-the-middle trying to use a certificate that is not validated by a known trusted CA will be caught immediately.
 
 \vspace{2.5mm}
 \noindent
@@ -255,7 +265,7 @@ A compromised-key attack occurs when the attacker determines the key, which is a
 \noindent
 \textit{Our defense: }
 
-If the key is compromised, the attacker still needs access to the actual message in order to decrypt it. Since the message is encrypted twice, once by AES and then by SSL, the message is reasonably secure against this type of attack as the attacker needs two keys.
+Depending on the compromised key, the message is still secure based on several factors. Assuming that the compromised key is the key used in the AES encryption scheme, the attacker only needs access to the message delivered to the email of the recipient. As a result, in such a situation, the security relies on the security of the recipient's email service itself. Assuming that the compromised key is the shared secret key used in the TLS protocol, nothing can be determined as the message will always be encrypted with solely an AES scheme, or with an AES scheme and the scheme chosen through the TLS protocol. Assuming that both keys are compromised, the attacker could intercept the encrypted message as it is being sent through the TLS protocol, and decrypt it twice to recover the message. Intercepting this message would be simple for the attacker as long as the attacker can locate the communication channel being used.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

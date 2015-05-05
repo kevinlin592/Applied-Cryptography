@@ -179,7 +179,7 @@ Using TLS provides us with strong authentication, message privacy, and integrity
 \noindent
 \textit{How it works: }
 
-The majority of network communications occur in an unsecured or plaintext format. This means that an attacker who has gained access to data paths in your network can listen in and interpret the network traffic. In short, eavesdropping is the act of intercepting communications between two points. A specialized program can be used to sniff and record packets of data communications from a network. By using cryptographic tools for analysis and decryption, these recorded packets can be easily read and  examined afterward. As an example, Voice over IP (VoIP) calls made using IP-based communication can be picked up and recorded using protocol analyzers and then converted to audio files using other specialized software.
+The majority of normal network communications occur in an unsecured or plaintext format. This means that an attacker who has gained access to data paths in your network can listen in and interpret the network traffic. In short, data eavesdropping is the act of intercepting communications between two points. A specialized program can be used to sniff and record packets of data communications from a network. Afterwards, by using tools for analysis, these recorded packets can be easily read and  examined. As an example, Voice over IP (VoIP) calls made using IP-based communication can be picked up and recorded using protocol analyzers and then converted to audio files using other specialized software.
 
 \vspace{2.5mm}
 \noindent
@@ -211,7 +211,7 @@ Since our transmission is encrypted, the attacker cannot alter the data without 
 \noindent
 \textit{How it works: }
 
-A data replay attack is a form of network attack in which a valid data transmission is maliciously or fraudulently repeated or delayed. Suppose Alice wants to prove her identity to Bob. Bob requests her password as proof of identity, which Alice dutifully provides. Meanwhile, Eve is eavesdropping on the conversation and keeps the password. After the interchange is over, Eve (posing as Alice) connects to Bob; when asked for a proof of identity, Eve sends Alice's password (or hash) read from the last session, which Bob accepts thus granting access to Eve.
+A data replay attack is a form of attack in which a valid data transmission is maliciously or fraudulently repeated or delayed. Suppose Alice wants to prove her identity to Bob. Bob requests her password as proof of identity, which Alice dutifully provides. Meanwhile, Eve is eavesdropping on the conversation and keeps the password. After the interchange is over, Eve (posing as Alice) connects to Bob; when asked for a proof of identity, Eve sends Alice's password (or hash) read from the last session, which Bob accepts thus granting access to Eve.
 
 \vspace{2.5mm}
 \noindent
@@ -227,7 +227,7 @@ The TLS channel itself is protected against replay attacks using the HMAC in the
 \noindent
 \textit{How it works: }
 
-Most networks and operating systems use the IP address of a computer to identify a valid entity. In certain cases, it is possible for an IP address to be falsely assumed (identity spoofing). The attacker then masquerades as another by falsifying data and gaining an illegitimate advantage. An attacker might also use special programs to construct IP packets that appear to originate from valid addresses. After gaining access to the network with a valid IP address, the attacker can modify, reroute, or delete your data.
+In this type of attack, the attacker masquerades as another by falsifying data and gaining an illegitimate advantage. One thing an attacker can do is to use special programs that construct IP packets which appear to originate from valid addresses. After gaining access to the network with a valid IP address, the attacker can modify, reroute, or delete your data.
 
 \vspace{2.5mm}
 \noindent
@@ -243,7 +243,7 @@ This type of attack is not much of a problem for TLS connections as TLS authenti
 \noindent
 \textit{How it works: }
 
-In this attack, an attacker places himself in between a visitor and a web site, impersonating both. With this attack, the browser thinks it is talking to the server on an encrypted channel, and the server thinks it is talking to the browser, but they are both talking to the attacker who is sitting in the middle. All traffic passes through this man-in-the-middle, who is able to read and modify any of the data.
+In this attack, an attacker places himself in between a client and server, impersonating both. With this attack, the client thinks it is talking to the server on an encrypted channel, and the server thinks it is talking to the client, but they are both talking to the attacker who is sitting in the middle. All traffic passes through this man-in-the-middle, who is able to read and modify any of the data.
 
 \vspace{2.5mm}
 \noindent
@@ -259,7 +259,7 @@ The certificate authority system is designed to stop the man-in-the-middle attac
 \noindent
 \textit{How it works: }
 
-A compromised-key attack occurs when the attacker determines the key, which is a secret code or number used to encrypt, decrypt, or validate secret information. This key corresponds to the certificate associated with the server. When the attacker is successful in determining the key, the attacker uses the key to decrypt encrypted data without the knowledge of the sender of the data. 
+A compromised-key attack occurs when the attacker determines the key, which is a secret code or number used to encrypt, decrypt, or validate secret information. When the attacker is successful in determining the key, the attacker uses the key to decrypt encrypted data without the knowledge of the sender of the data. 
 
 \vspace{2.5mm}
 \noindent
